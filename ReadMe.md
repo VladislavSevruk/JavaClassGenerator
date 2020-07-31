@@ -1,1 +1,1 @@
-# Java Model Class Generator
+# Java Class Generator
