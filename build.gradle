@@ -43,7 +43,7 @@ dependencies {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "VladislavSevruk_JavaModelClassGenerator"
+        property "sonar.projectKey", "VladislavSevruk_JavaClassGenerator"
     }
 }
 
