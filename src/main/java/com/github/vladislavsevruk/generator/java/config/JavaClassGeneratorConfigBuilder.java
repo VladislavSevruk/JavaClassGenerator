@@ -37,11 +37,11 @@ import java.io.File;
 @Setter
 public class JavaClassGeneratorConfigBuilder {
 
-    private boolean addJacksonAnnotations = false;
     private boolean addEmptyLineBetweenFields = true;
+    private boolean addJacksonAnnotations = false;
     private String pathToTargetFolder;
-    private Indent useIndent;
     private boolean sortFieldsByModifiers = true;
+    private Indent useIndent;
     private boolean useLombokAnnotations = true;
 
     JavaClassGeneratorConfigBuilder() {

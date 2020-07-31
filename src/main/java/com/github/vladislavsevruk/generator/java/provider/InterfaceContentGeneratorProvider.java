@@ -26,10 +26,8 @@ package com.github.vladislavsevruk.generator.java.provider;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.InterfaceDeclarationGenerator;
-import com.github.vladislavsevruk.generator.java.generator.declaration.PackageGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaInterface;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,21 +37,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-public class InterfaceContentGeneratorProvider implements JavaClassContentGeneratorProvider {
-
-    @Getter
-    private ClassElementGenerator classDeclarationGenerator = new InterfaceDeclarationGenerator(
-            getDefaultClassAnnotationGenerators());
-    @Getter
-    private List<ClassElementGenerator> constructorGenerators = getDefaultConstructorGenerators();
-    @Getter
-    private List<ClassElementGenerator> fieldGenerators = getDefaultFieldGenerators();
-    @Getter
-    private List<ClassImportGenerator> importGenerators = getDefaultImportGenerators();
-    @Getter
-    private List<ClassElementGenerator> methodGenerators = getDefaultMethodGenerators();
-    @Getter
-    private ClassElementGenerator packageGenerator = new PackageGenerator();
+public class InterfaceContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**
      * {@inheritDoc}
@@ -63,24 +47,35 @@ public class InterfaceContentGeneratorProvider implements JavaClassContentGenera
         return SchemaInterface.class.isAssignableFrom(schemaObject.getClass());
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultClassAnnotationGenerators() {
         return new ArrayList<>();
     }
 
+    @Override
+    protected ClassElementGenerator getDefaultClassDeclarationGenerator(
+            List<ClassElementGenerator> defaultClassAnnotationGenerators) {
+        return new InterfaceDeclarationGenerator(getDefaultClassAnnotationGenerators());
+    }
+
+    @Override
+    protected List<ClassElementGenerator> getDefaultConstructorGenerators() {
+        // no constructors required for interfaces
+        return new ArrayList<>();
+    }
+
+    @Override
     protected List<ClassElementGenerator> getDefaultFieldGenerators() {
         return new ArrayList<>();
     }
 
+    @Override
     protected List<ClassImportGenerator> getDefaultImportGenerators() {
         return new ArrayList<>();
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultMethodGenerators() {
-        return new ArrayList<>();
-    }
-
-    private List<ClassElementGenerator> getDefaultConstructorGenerators() {
-        // no constructors required for interfaces
         return new ArrayList<>();
     }
 }

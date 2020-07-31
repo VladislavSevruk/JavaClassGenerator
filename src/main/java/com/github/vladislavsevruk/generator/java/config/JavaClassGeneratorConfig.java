@@ -35,8 +35,8 @@ import lombok.Value;
 @Value
 public class JavaClassGeneratorConfig {
 
-    boolean addJacksonAnnotations;
     boolean addEmptyLineBetweenFields;
+    boolean addJacksonAnnotations;
     Indent indent;
     String pathToTargetFolder;
     boolean sortFieldsByModifiers;

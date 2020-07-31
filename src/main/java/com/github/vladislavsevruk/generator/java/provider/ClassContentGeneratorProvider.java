@@ -28,7 +28,6 @@ import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.FieldAnnotationGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.ClassDeclarationGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.LombokClassAnnotationGenerator;
-import com.github.vladislavsevruk.generator.java.generator.declaration.PackageGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.FieldTypeImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.InterfaceImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.JacksonImportGenerator;
@@ -42,7 +41,6 @@ import com.github.vladislavsevruk.generator.java.generator.method.GetterSetterGe
 import com.github.vladislavsevruk.generator.java.generator.method.HashCodeGenerator;
 import com.github.vladislavsevruk.generator.java.generator.method.ToStringGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,21 +50,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-public class ClassContentGeneratorProvider implements JavaClassContentGeneratorProvider {
-
-    @Getter
-    private ClassElementGenerator classDeclarationGenerator = new ClassDeclarationGenerator(
-            getDefaultClassAnnotationGenerators());
-    @Getter
-    private List<ClassElementGenerator> constructorGenerators = getDefaultConstructorGenerators();
-    @Getter
-    private List<ClassElementGenerator> fieldGenerators = getDefaultFieldGenerators();
-    @Getter
-    private List<ClassImportGenerator> importGenerators = getDefaultImportGenerators();
-    @Getter
-    private List<ClassElementGenerator> methodGenerators = getDefaultMethodGenerators();
-    @Getter
-    private ClassElementGenerator packageGenerator = new PackageGenerator();
+public class ClassContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**
      * {@inheritDoc}
@@ -76,12 +60,20 @@ public class ClassContentGeneratorProvider implements JavaClassContentGeneratorP
         return true;
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultClassAnnotationGenerators() {
         List<ClassElementGenerator> classAnnotationGenerators = new ArrayList<>();
         classAnnotationGenerators.add(new LombokClassAnnotationGenerator());
         return classAnnotationGenerators;
     }
 
+    @Override
+    protected ClassElementGenerator getDefaultClassDeclarationGenerator(
+            List<ClassElementGenerator> defaultClassAnnotationGenerators) {
+        return new ClassDeclarationGenerator(getDefaultClassAnnotationGenerators());
+    }
+
+    @Override
     protected List<ClassElementGenerator> getDefaultConstructorGenerators() {
         return new ArrayList<>();
     }
@@ -92,6 +84,7 @@ public class ClassContentGeneratorProvider implements JavaClassContentGeneratorP
         return defaultFieldAnnotationGenerators;
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultFieldGenerators() {
         List<ClassElementGenerator> defaultFieldGenerators = new ArrayList<>();
         defaultFieldGenerators.add(new ClassFieldGenerator(getDefaultFieldAnnotationGenerators()));
@@ -102,6 +95,7 @@ public class ClassContentGeneratorProvider implements JavaClassContentGeneratorP
         return new ArrayList<>();
     }
 
+    @Override
     protected List<ClassImportGenerator> getDefaultImportGenerators() {
         List<ClassImportGenerator> defaultImportGenerators = new ArrayList<>();
         defaultImportGenerators.add(new JacksonImportGenerator());
@@ -113,6 +107,7 @@ public class ClassContentGeneratorProvider implements JavaClassContentGeneratorP
         return defaultImportGenerators;
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultMethodGenerators() {
         List<ClassElementGenerator> defaultMethodGenerators = new ArrayList<>();
         defaultMethodGenerators.add(new GetterSetterGenerator(getDefaultGetterAnnotationGenerators(),

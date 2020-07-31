@@ -69,8 +69,8 @@ public class HashCodeGenerator extends BaseMethodGenerator {
         finishLineByGetter(stringBuilder, getterPrefix, fieldName);
     }
 
-    private void addHashCodeForDouble(StringBuilder stringBuilder, JavaClassGeneratorConfig config,
-            String getterPrefix, String fieldName) {
+    private void addHashCodeForDouble(StringBuilder stringBuilder, JavaClassGeneratorConfig config, String getterPrefix,
+            String fieldName) {
         doubleIndents(stringBuilder, config).append("long a").append(fieldName).append(" = Double.doubleToLongBits(")
                 .append(getterPrefix).append(fieldName).append("());\n");
         addHashCodeForLong(stringBuilder, config, fieldName);
@@ -129,8 +129,8 @@ public class HashCodeGenerator extends BaseMethodGenerator {
         addHashCodeForLong(stringBuilder, config, fieldName);
     }
 
-    private void addHashCodeForObject(StringBuilder stringBuilder, JavaClassGeneratorConfig config,
-            String getterPrefix, String fieldName) {
+    private void addHashCodeForObject(StringBuilder stringBuilder, JavaClassGeneratorConfig config, String getterPrefix,
+            String fieldName) {
         doubleIndents(stringBuilder, config).append("Object a").append(fieldName).append(" = ");
         finishLineByGetter(stringBuilder, getterPrefix, fieldName);
         doubleIndents(stringBuilder, config).append("hashCode = 59 * hashCode + (a").append(fieldName)

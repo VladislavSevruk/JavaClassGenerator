@@ -65,6 +65,18 @@ public final class FieldModifierComparator implements Comparator<String> {
         return 0;
     }
 
+    private int getFieldModifiers(String field) {
+        Matcher matcher = FIELD_MODIFIERS_PATTERN.matcher(field);
+        matcher.region(0, field.indexOf(';'));
+        // max 5 modifiers
+        int i = 5;
+        int modifiers = 0;
+        while (matcher.find() && i-- > 0) {
+            modifiers = modifiers | pickModifier(matcher.group(1));
+        }
+        return modifiers;
+    }
+
     private int pickModifier(String modifier) {
         switch (modifier) {
             case "private":
@@ -85,17 +97,5 @@ public final class FieldModifierComparator implements Comparator<String> {
                 // no other field modifiers at Java 8 but may be added at following ones - who knows?
                 return 0;
         }
-    }
-
-    private int getFieldModifiers(String field) {
-        Matcher matcher = FIELD_MODIFIERS_PATTERN.matcher(field);
-        matcher.region(0, field.indexOf(';'));
-        // max 5 modifiers
-        int i = 5;
-        int modifiers = 0;
-        while (matcher.find() && i-- > 0) {
-            modifiers = modifiers | pickModifier(matcher.group(1));
-        }
-        return modifiers;
     }
 }

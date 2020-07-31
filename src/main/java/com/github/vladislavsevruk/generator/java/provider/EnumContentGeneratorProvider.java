@@ -26,11 +26,9 @@ package com.github.vladislavsevruk.generator.java.provider;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.EnumDeclarationGenerator;
-import com.github.vladislavsevruk.generator.java.generator.declaration.PackageGenerator;
 import com.github.vladislavsevruk.generator.java.generator.field.EnumConstantGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaEnum;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,21 +38,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-public class EnumContentGeneratorProvider implements JavaClassContentGeneratorProvider {
-
-    @Getter
-    private ClassElementGenerator classDeclarationGenerator = new EnumDeclarationGenerator(
-            getDefaultClassAnnotationGenerators());
-    @Getter
-    private List<ClassElementGenerator> constructorGenerators = getDefaultConstructorGenerators();
-    @Getter
-    private List<ClassElementGenerator> fieldGenerators = getDefaultFieldGenerators();
-    @Getter
-    private List<ClassImportGenerator> importGenerators = getDefaultImportGenerators();
-    @Getter
-    private List<ClassElementGenerator> methodGenerators = getDefaultMethodGenerators();
-    @Getter
-    private ClassElementGenerator packageGenerator = new PackageGenerator();
+public class EnumContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**
      * {@inheritDoc}
@@ -64,24 +48,35 @@ public class EnumContentGeneratorProvider implements JavaClassContentGeneratorPr
         return SchemaEnum.class.isAssignableFrom(schemaObject.getClass());
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultClassAnnotationGenerators() {
         return new ArrayList<>();
     }
 
+    @Override
+    protected ClassElementGenerator getDefaultClassDeclarationGenerator(
+            List<ClassElementGenerator> defaultClassAnnotationGenerators) {
+        return new EnumDeclarationGenerator(getDefaultClassAnnotationGenerators());
+    }
+
+    @Override
     protected List<ClassElementGenerator> getDefaultConstructorGenerators() {
         return new ArrayList<>();
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultFieldGenerators() {
         List<ClassElementGenerator> defaultFieldGenerators = new ArrayList<>();
         defaultFieldGenerators.add(new EnumConstantGenerator());
         return defaultFieldGenerators;
     }
 
+    @Override
     protected List<ClassImportGenerator> getDefaultImportGenerators() {
         return new ArrayList<>();
     }
 
+    @Override
     protected List<ClassElementGenerator> getDefaultMethodGenerators() {
         return new ArrayList<>();
     }

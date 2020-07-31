@@ -51,6 +51,17 @@ public class JavaClassGenerator {
     }
 
     /**
+     * Generates Java class file for received class schema according to received configuration parameters.
+     *
+     * @param config       <code>JavaClassGeneratorConfig</code> with parameters for Java classes generation.
+     * @param schemaObject <code>SchemaObject</code> to generate Java class file for.
+     */
+    public void generateJavaClass(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
+        FileUtil.recursiveMkdir(config.getPathToTargetFolder());
+        generateJavaClassFile(config, schemaObject);
+    }
+
+    /**
      * Generates Java class files for all class schemas at received storage according to received configuration
      * parameters.
      *
@@ -60,17 +71,6 @@ public class JavaClassGenerator {
     public void generateJavaClasses(JavaClassGeneratorConfig config, SchemaObjectStorage storage) {
         FileUtil.recursiveMkdir(config.getPathToTargetFolder());
         storage.getAllObjects().forEach(object -> generateJavaClass(config, object));
-    }
-
-    /**
-     * Generates Java class file for received class schema according to received configuration parameters.
-     *
-     * @param config       <code>JavaClassGeneratorConfig</code> with parameters for Java classes generation.
-     * @param schemaObject <code>SchemaObject</code> to generate Java class file for.
-     */
-    public void generateJavaClass(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        FileUtil.recursiveMkdir(config.getPathToTargetFolder());
-        generateJavaClassFile(config, schemaObject);
     }
 
     private void generateJavaClassFile(JavaClassGeneratorConfig config, SchemaObject schemaObject) {

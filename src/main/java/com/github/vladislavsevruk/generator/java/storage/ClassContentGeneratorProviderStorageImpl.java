@@ -23,10 +23,10 @@
  */
 package com.github.vladislavsevruk.generator.java.storage;
 
-import com.github.vladislavsevruk.generator.java.provider.JavaClassContentGeneratorProvider;
+import com.github.vladislavsevruk.generator.java.provider.ClassContentGeneratorProvider;
 import com.github.vladislavsevruk.generator.java.provider.EnumContentGeneratorProvider;
 import com.github.vladislavsevruk.generator.java.provider.InterfaceContentGeneratorProvider;
-import com.github.vladislavsevruk.generator.java.provider.ClassContentGeneratorProvider;
+import com.github.vladislavsevruk.generator.java.provider.JavaClassContentGeneratorProvider;
 import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
