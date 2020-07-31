@@ -39,7 +39,8 @@ public final class FieldModifierComparator implements Comparator<String> {
     private static final Pattern FIELD_MODIFIERS_PATTERN = Pattern
             .compile("(private|protected|public|static|final|volatile|transient)\\s+");
     private static final List<Predicate<Integer>> FIELD_MODIFIERS_PREDICATES = Arrays
-            .asList(Modifier::isStatic, Modifier::isPrivate, Modifier::isProtected, Modifier::isPublic);
+            .asList(Modifier::isPublic, Modifier::isProtected, mod -> !Modifier.isPrivate(mod),
+                    ((Predicate<Integer>) Modifier::isStatic).and(Modifier::isFinal), Modifier::isStatic);
 
     /**
      * {@inheritDoc}
