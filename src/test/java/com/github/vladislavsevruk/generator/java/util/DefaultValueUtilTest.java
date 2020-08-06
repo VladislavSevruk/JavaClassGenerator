@@ -21,28 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.github.vladislavsevruk.generator.java.generator.dependency;
+package com.github.vladislavsevruk.generator.java.util;
 
-import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
-import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.function.Supplier;
 
-/**
- * Generates import 'java.util.Objects'.
- */
-public class ObjectsImportGenerator implements ClassImportGenerator {
+class DefaultValueUtilTest {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<String> generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        if (config.isUseLombokAnnotations() || schemaObject.getFields().isEmpty()) {
-            return Collections.emptyList();
-        }
-        return Collections.singleton("import java.util.Objects;\n");
+    @Test
+    void orDefaultSupplier() {
+        String value = "default";
+        Supplier<String> defaultSupplier = () -> value;
+        Assertions.assertEquals(value, DefaultValueUtil.orDefault(null, defaultSupplier));
     }
 }

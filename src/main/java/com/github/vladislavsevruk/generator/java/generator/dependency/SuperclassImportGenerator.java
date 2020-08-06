@@ -25,17 +25,23 @@ package com.github.vladislavsevruk.generator.java.generator.dependency;
 
 import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Generates import for class superclass.
  */
+@EqualsAndHashCode(callSuper = true)
 public class SuperclassImportGenerator extends AbstractImportGenerator {
 
     @Override
     protected Set<SchemaEntity> collectInnerEntities(SchemaObject schemaObject) {
+        if (schemaObject.getSuperclass() == null) {
+            return Collections.emptySet();
+        }
         Set<SchemaEntity> collectedEntities = new HashSet<>();
         collectInnerEntities(collectedEntities, schemaObject.getSuperclass());
         return collectedEntities;

@@ -95,7 +95,7 @@ public final class ClassGenerationModuleFactory {
      * @param storage new instance of <code>ClassGenerationModuleFactoryMethod</code> for
      *                <code>ClassContentGeneratorProviderStorage</code>.
      */
-    public static void replaceContentGeneratorProviderStorage(
+    public static void replaceClassContentGeneratorProviderStorage(
             ClassGenerationModuleFactoryMethod<ClassContentGeneratorProviderStorage> storage) {
         CLASS_CONTENT_GENERATOR_PROVIDER_STORAGE_LOCK.writeLock().lock();
         logger.info(() -> String.format("Replacing ClassContentGeneratorProviderStorage by '%s'.",

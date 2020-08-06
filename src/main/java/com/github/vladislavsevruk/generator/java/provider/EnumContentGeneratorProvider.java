@@ -23,12 +23,14 @@
  */
 package com.github.vladislavsevruk.generator.java.provider;
 
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.EnumDeclarationGenerator;
+import com.github.vladislavsevruk.generator.java.generator.dependency.InterfaceImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.field.EnumConstantGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaEnum;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
+@EqualsAndHashCode(callSuper = true)
 public class EnumContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**
@@ -65,15 +68,17 @@ public class EnumContentGeneratorProvider extends AbstractJavaClassContentGenera
     }
 
     @Override
-    protected List<ClassElementGenerator> getDefaultFieldGenerators() {
-        List<ClassElementGenerator> defaultFieldGenerators = new ArrayList<>();
+    protected List<ClassElementCollectionGenerator> getDefaultFieldGenerators() {
+        List<ClassElementCollectionGenerator> defaultFieldGenerators = new ArrayList<>();
         defaultFieldGenerators.add(new EnumConstantGenerator());
         return defaultFieldGenerators;
     }
 
     @Override
-    protected List<ClassImportGenerator> getDefaultImportGenerators() {
-        return new ArrayList<>();
+    protected List<ClassElementCollectionGenerator> getDefaultImportGenerators() {
+        List<ClassElementCollectionGenerator> defaultImportGenerators = new ArrayList<>();
+        defaultImportGenerators.add(new InterfaceImportGenerator());
+        return defaultImportGenerators;
     }
 
     @Override

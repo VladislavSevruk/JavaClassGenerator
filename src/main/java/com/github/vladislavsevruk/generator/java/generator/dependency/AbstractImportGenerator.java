@@ -24,21 +24,24 @@
 package com.github.vladislavsevruk.generator.java.generator.dependency;
 
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaElementSequence;
 import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * Contains common logic for class import generators.
  *
- * @see ClassImportGenerator
+ * @see ClassElementCollectionGenerator
  */
-public abstract class AbstractImportGenerator implements ClassImportGenerator {
+@EqualsAndHashCode
+public abstract class AbstractImportGenerator implements ClassElementCollectionGenerator {
 
     /**
      * {@inheritDoc}
@@ -55,7 +58,7 @@ public abstract class AbstractImportGenerator implements ClassImportGenerator {
             entities.add(schemaEntity);
         }
         if (isSequence(schemaEntity)) {
-            ((SchemaElementSequence) schemaEntity).getElementTypes()
+            ((SchemaElementSequence) schemaEntity).getElementTypes().stream().filter(Objects::nonNull)
                     .forEach(entity -> collectInnerEntities(entities, entity));
         }
     }

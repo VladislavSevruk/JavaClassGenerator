@@ -26,12 +26,14 @@ package com.github.vladislavsevruk.generator.java.generator.declaration;
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates declaration line for Java class.
  */
+@EqualsAndHashCode(callSuper = true)
 public class ClassDeclarationGenerator extends BaseDeclarationGenerator {
 
     public ClassDeclarationGenerator(List<ClassElementGenerator> classAnnotationGenerators) {
@@ -43,14 +45,14 @@ public class ClassDeclarationGenerator extends BaseDeclarationGenerator {
      */
     @Override
     public String generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("\n");
         addAnnotations(stringBuilder, config, schemaObject);
         stringBuilder.append("public class ").append(schemaObject.getParameterizedDeclaration());
         if (schemaObject.hasSuperclass()) {
             stringBuilder.append(" extends ").append(schemaObject.getSuperclass().getParameterizedDeclaration());
         }
         addInterfaces(stringBuilder, schemaObject);
-        stringBuilder.append(" {\n\n");
+        stringBuilder.append(" {\n");
         return stringBuilder.toString();
     }
 }

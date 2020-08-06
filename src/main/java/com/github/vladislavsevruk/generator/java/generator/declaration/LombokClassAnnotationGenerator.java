@@ -26,10 +26,12 @@ package com.github.vladislavsevruk.generator.java.generator.declaration;
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 /**
  * Generates Lombok annotations for class.
  */
+@EqualsAndHashCode
 public class LombokClassAnnotationGenerator implements ClassElementGenerator {
 
     /**

@@ -23,8 +23,8 @@
  */
 package com.github.vladislavsevruk.generator.java.provider;
 
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 
 import java.util.Collection;
@@ -45,14 +45,14 @@ public interface JavaClassContentGeneratorProvider {
     Collection<ClassElementGenerator> getConstructorGenerators();
 
     /**
-     * Returns <code>Collection</code> of <code>ClassElementGenerator</code> for class fields generation.
+     * Returns <code>Collection</code> of <code>ClassElementCollectionGenerator</code> for class fields generation.
      */
-    Collection<ClassElementGenerator> getFieldGenerators();
+    Collection<ClassElementCollectionGenerator> getFieldGenerators();
 
     /**
      * Returns <code>Collection</code> of <code>ClassImportGenerator</code> for class imports generation.
      */
-    Collection<ClassImportGenerator> getImportGenerators();
+    Collection<ClassElementCollectionGenerator> getImportGenerators();
 
     /**
      * Returns <code>Collection</code> of <code>ClassElementGenerator</code> for class methods generation.

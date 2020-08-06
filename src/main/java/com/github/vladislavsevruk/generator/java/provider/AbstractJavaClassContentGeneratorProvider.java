@@ -23,9 +23,10 @@
  */
 package com.github.vladislavsevruk.generator.java.provider;
 
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.PackageGenerator;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.List;
@@ -35,6 +36,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
+@EqualsAndHashCode
 public abstract class AbstractJavaClassContentGeneratorProvider implements JavaClassContentGeneratorProvider {
 
     @Getter
@@ -43,9 +45,9 @@ public abstract class AbstractJavaClassContentGeneratorProvider implements JavaC
     @Getter
     private List<ClassElementGenerator> constructorGenerators = getDefaultConstructorGenerators();
     @Getter
-    private List<ClassElementGenerator> fieldGenerators = getDefaultFieldGenerators();
+    private List<ClassElementCollectionGenerator> fieldGenerators = getDefaultFieldGenerators();
     @Getter
-    private List<ClassImportGenerator> importGenerators = getDefaultImportGenerators();
+    private List<ClassElementCollectionGenerator> importGenerators = getDefaultImportGenerators();
     @Getter
     private List<ClassElementGenerator> methodGenerators = getDefaultMethodGenerators();
     @Getter
@@ -58,9 +60,9 @@ public abstract class AbstractJavaClassContentGeneratorProvider implements JavaC
 
     protected abstract List<ClassElementGenerator> getDefaultConstructorGenerators();
 
-    protected abstract List<ClassElementGenerator> getDefaultFieldGenerators();
+    protected abstract List<ClassElementCollectionGenerator> getDefaultFieldGenerators();
 
-    protected abstract List<ClassImportGenerator> getDefaultImportGenerators();
+    protected abstract List<ClassElementCollectionGenerator> getDefaultImportGenerators();
 
     protected abstract List<ClassElementGenerator> getDefaultMethodGenerators();
 }

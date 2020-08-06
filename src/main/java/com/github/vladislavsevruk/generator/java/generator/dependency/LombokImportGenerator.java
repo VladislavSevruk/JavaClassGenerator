@@ -24,8 +24,9 @@
 package com.github.vladislavsevruk.generator.java.generator.dependency;
 
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +36,8 @@ import java.util.Set;
 /**
  * Generates imports for Lombok library annotations.
  */
-public class LombokImportGenerator implements ClassImportGenerator {
+@EqualsAndHashCode
+public class LombokImportGenerator implements ClassElementCollectionGenerator {
 
     /**
      * {@inheritDoc}

@@ -41,6 +41,9 @@ public class MapSchemaEntity implements SchemaElementSequence {
     private SchemaEntity keyType;
     private SchemaEntity valueType;
 
+    public MapSchemaEntity() {
+    }
+
     public MapSchemaEntity(SchemaEntity keyType, SchemaEntity valueType) {
         this.keyType = keyType;
         this.valueType = valueType;

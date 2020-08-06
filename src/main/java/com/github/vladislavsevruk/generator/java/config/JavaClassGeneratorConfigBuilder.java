@@ -53,7 +53,7 @@ public class JavaClassGeneratorConfigBuilder {
     public JavaClassGeneratorConfig build() {
         pathToTargetFolder = DefaultValueUtil.orDefault(pathToTargetFolder, getDefaultTargetFolder());
         useIndent = DefaultValueUtil.orDefault(useIndent, Indent.SPACES_4);
-        return new JavaClassGeneratorConfig(addJacksonAnnotations, addEmptyLineBetweenFields, useIndent,
+        return new JavaClassGeneratorConfig(addEmptyLineBetweenFields, addJacksonAnnotations, useIndent,
                 pathToTargetFolder, sortFieldsByModifiers, useLombokAnnotations);
     }
 

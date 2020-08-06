@@ -27,6 +27,7 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ import java.util.stream.Collectors;
 /**
  * Generates declaration line for Java interface.
  */
+@EqualsAndHashCode(callSuper = true)
 public class InterfaceDeclarationGenerator extends BaseDeclarationGenerator {
 
     public InterfaceDeclarationGenerator(List<ClassElementGenerator> interfaceAnnotationGenerators) {
@@ -45,7 +47,7 @@ public class InterfaceDeclarationGenerator extends BaseDeclarationGenerator {
      */
     @Override
     public String generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("\n");
         addAnnotations(stringBuilder, config, schemaObject);
         stringBuilder.append("public interface ").append(schemaObject.getParameterizedDeclaration());
         List<SchemaEntity> interfaces = schemaObject.getInterfaces();
@@ -54,7 +56,7 @@ public class InterfaceDeclarationGenerator extends BaseDeclarationGenerator {
                     .collect(Collectors.joining(", "));
             stringBuilder.append(" extends ").append(interfacesDeclaration);
         }
-        stringBuilder.append(" {\n\n");
+        stringBuilder.append(" {\n");
         return stringBuilder.toString();
     }
 }

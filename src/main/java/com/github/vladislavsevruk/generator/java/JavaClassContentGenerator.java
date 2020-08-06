@@ -28,6 +28,7 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.provider.JavaClassContentGeneratorProvider;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,18 +74,16 @@ public class JavaClassContentGenerator {
         return stringBuilder.toString();
     }
 
-    private String addEmptyLineBetweenFields(JavaClassGeneratorConfig config, String field) {
-        if (config.isAddEmptyLineBetweenFields()) {
-            return field.trim() + "\n\n";
-        }
-        return field;
-    }
-
     private void appendFields(StringBuilder stringBuilder, JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        classContentGeneratorProvider.getFieldGenerators().stream()
-                .map(generator -> generator.generate(config, schemaObject))
+        List<String> fields = classContentGeneratorProvider.getFieldGenerators().stream()
+                .map(generator -> generator.generate(config, schemaObject)).filter(values -> !values.isEmpty())
+                .flatMap(Collection::stream)
                 .sorted((f1, f2) -> config.isSortFieldsByModifiers() ? fieldModifierComparator.compare(f1, f2) : 0)
-                .map(field -> addEmptyLineBetweenFields(config, field)).forEach(stringBuilder::append);
+                .collect(Collectors.toList());
+        if (!fields.isEmpty() && !config.isAddEmptyLineBetweenFields()) {
+            stringBuilder.append("\n");
+        }
+        fields.forEach(stringBuilder::append);
     }
 
     private void appendImports(StringBuilder stringBuilder, JavaClassGeneratorConfig config,
@@ -92,6 +91,9 @@ public class JavaClassContentGenerator {
         List<String> imports = classContentGeneratorProvider.getImportGenerators().stream()
                 .flatMap(generator -> generator.generate(config, schemaObject).stream()).distinct()
                 .sorted(String::compareTo).collect(Collectors.toList());
+        if (!imports.isEmpty()) {
+            stringBuilder.append("\n");
+        }
         String prevImportStatement = null;
         for (String importStatement : imports) {
             if (prevImportStatement != null && isDomainDiffers(prevImportStatement, importStatement)) {
@@ -99,9 +101,6 @@ public class JavaClassContentGenerator {
             }
             stringBuilder.append(importStatement);
             prevImportStatement = importStatement;
-        }
-        if (!imports.isEmpty()) {
-            stringBuilder.append("\n");
         }
     }
 

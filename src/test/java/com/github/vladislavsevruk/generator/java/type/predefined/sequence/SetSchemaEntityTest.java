@@ -21,25 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.github.vladislavsevruk.generator.java.generator;
+package com.github.vladislavsevruk.generator.java.type.predefined.sequence;
 
-import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
-import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
+import com.github.vladislavsevruk.generator.java.type.predefined.CommonJavaSchemaEntity;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
+class SetSchemaEntityTest {
 
-/**
- * Generates class import declaration.
- */
-@FunctionalInterface
-public interface ClassImportGenerator {
+    @Test
+    void getDelayedElementTypeTest() {
+        SetSchemaEntity schemaEntity = new SetSchemaEntity(() -> CommonJavaSchemaEntity.STRING);
+        Assertions.assertEquals(CommonJavaSchemaEntity.STRING, schemaEntity.getElementType());
+    }
 
-    /**
-     * Generates class import declaration.
-     *
-     * @param config       <code>JavaClassGeneratorConfig</code> with parameters for Java classes generation.
-     * @param schemaObject <code>SchemaObject</code> to generate import for.
-     * @return <code>String</code> with generated class import declaration.
-     */
-    Collection<String> generate(JavaClassGeneratorConfig config, SchemaObject schemaObject);
+    @Test
+    void getNullElementTypeParameterizedDeclarationTest() {
+        SetSchemaEntity schemaEntity = new SetSchemaEntity((SchemaEntity) null);
+        Assertions.assertEquals("Set", schemaEntity.getParameterizedDeclaration());
+    }
+
+    @Test
+    void getNullElementTypeTest() {
+        SetSchemaEntity schemaEntity = new SetSchemaEntity((SchemaEntity) null);
+        Assertions.assertNull(schemaEntity.getElementType());
+    }
 }
+

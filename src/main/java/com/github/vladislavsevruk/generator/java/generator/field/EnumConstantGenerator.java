@@ -24,28 +24,32 @@
 package com.github.vladislavsevruk.generator.java.generator.field;
 
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
-import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.type.SchemaUnit;
+import lombok.EqualsAndHashCode;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 /**
  * Generates Java enumeration constant fields.
  */
-public class EnumConstantGenerator implements ClassElementGenerator {
+@EqualsAndHashCode
+public class EnumConstantGenerator implements ClassElementCollectionGenerator {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
+    public Collection<String> generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
         StringBuilder stringBuilder = new StringBuilder();
         String values = schemaObject.getFields().stream().map(SchemaUnit::getName)
                 .collect(Collectors.joining(",\n" + config.getIndent().value()));
         if (!values.isEmpty()) {
             stringBuilder.append(config.getIndent().value()).append(values).append("\n");
         }
-        return stringBuilder.toString();
+        return Collections.singletonList(stringBuilder.toString());
     }
 }

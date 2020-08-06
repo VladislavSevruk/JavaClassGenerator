@@ -29,6 +29,7 @@ import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.DefaultValueUtil;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
+import lombok.EqualsAndHashCode;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +37,7 @@ import java.util.List;
 /**
  * Generates getter and setter methods for class fields.
  */
+@EqualsAndHashCode(callSuper = true)
 public class GetterSetterGenerator extends BaseMethodGenerator {
 
     private List<FieldAnnotationGenerator> getterAnnotationGenerators;
@@ -66,9 +68,10 @@ public class GetterSetterGenerator extends BaseMethodGenerator {
     }
 
     private void addGetter(StringBuilder stringBuilder, JavaClassGeneratorConfig config, SchemaField field) {
+        stringBuilder.append("\n");
         String javaFieldName = field.getName();
         getterAnnotationGenerators.forEach(generator -> stringBuilder.append(generator.generate(config, field)));
-        String javaType = field.getType().getName();
+        String javaType = field.getType().getParameterizedDeclaration();
         String getterPrefix = getterPrefix(javaType);
         stringBuilder.append(config.getIndent().value()).append("public ").append(javaType).append(" ")
                 .append(getterPrefix).append(EntityNameUtil.uppercaseFirstLetter(javaFieldName)).append("() {\n");
@@ -78,11 +81,14 @@ public class GetterSetterGenerator extends BaseMethodGenerator {
 
     private void addSetter(StringBuilder stringBuilder, JavaClassGeneratorConfig config, SchemaObject schemaObject,
             SchemaField field) {
+        stringBuilder.append("\n");
         String javaFieldName = field.getName();
         setterAnnotationGenerators.forEach(generator -> stringBuilder.append(generator.generate(config, field)));
-        stringBuilder.append(config.getIndent().value()).append("public ").append(schemaObject.getName()).append(" ")
-                .append("set").append(EntityNameUtil.uppercaseFirstLetter(javaFieldName)).append("(")
-                .append(field.getType().getName()).append(" ").append(javaFieldName).append(") {\n");
+        stringBuilder.append(config.getIndent().value()).append("public ")
+                .append(schemaObject.getParameterizedDeclaration()).append(" ").append("set")
+                .append(EntityNameUtil.uppercaseFirstLetter(javaFieldName)).append("(")
+                .append(field.getType().getParameterizedDeclaration()).append(" ").append(javaFieldName)
+                .append(") {\n");
         doubleIndents(stringBuilder, config).append("this.").append(javaFieldName).append(" = ").append(javaFieldName)
                 .append(";\n");
         doubleIndents(stringBuilder, config).append("return this;\n");

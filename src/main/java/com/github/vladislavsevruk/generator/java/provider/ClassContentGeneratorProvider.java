@@ -23,16 +23,16 @@
  */
 package com.github.vladislavsevruk.generator.java.provider;
 
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.FieldAnnotationGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.ClassDeclarationGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.LombokClassAnnotationGenerator;
+import com.github.vladislavsevruk.generator.java.generator.dependency.EqualsMethodImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.FieldTypeImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.InterfaceImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.JacksonImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.LombokImportGenerator;
-import com.github.vladislavsevruk.generator.java.generator.dependency.ObjectsImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.dependency.SuperclassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.field.ClassFieldGenerator;
 import com.github.vladislavsevruk.generator.java.generator.field.JacksonFieldAnnotationGenerator;
@@ -41,6 +41,7 @@ import com.github.vladislavsevruk.generator.java.generator.method.GetterSetterGe
 import com.github.vladislavsevruk.generator.java.generator.method.HashCodeGenerator;
 import com.github.vladislavsevruk.generator.java.generator.method.ToStringGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
+@EqualsAndHashCode(callSuper = true)
 public class ClassContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**
@@ -85,8 +87,8 @@ public class ClassContentGeneratorProvider extends AbstractJavaClassContentGener
     }
 
     @Override
-    protected List<ClassElementGenerator> getDefaultFieldGenerators() {
-        List<ClassElementGenerator> defaultFieldGenerators = new ArrayList<>();
+    protected List<ClassElementCollectionGenerator> getDefaultFieldGenerators() {
+        List<ClassElementCollectionGenerator> defaultFieldGenerators = new ArrayList<>();
         defaultFieldGenerators.add(new ClassFieldGenerator(getDefaultFieldAnnotationGenerators()));
         return defaultFieldGenerators;
     }
@@ -96,14 +98,14 @@ public class ClassContentGeneratorProvider extends AbstractJavaClassContentGener
     }
 
     @Override
-    protected List<ClassImportGenerator> getDefaultImportGenerators() {
-        List<ClassImportGenerator> defaultImportGenerators = new ArrayList<>();
+    protected List<ClassElementCollectionGenerator> getDefaultImportGenerators() {
+        List<ClassElementCollectionGenerator> defaultImportGenerators = new ArrayList<>();
         defaultImportGenerators.add(new JacksonImportGenerator());
         defaultImportGenerators.add(new SuperclassImportGenerator());
         defaultImportGenerators.add(new InterfaceImportGenerator());
         defaultImportGenerators.add(new FieldTypeImportGenerator());
         defaultImportGenerators.add(new LombokImportGenerator());
-        defaultImportGenerators.add(new ObjectsImportGenerator());
+        defaultImportGenerators.add(new EqualsMethodImportGenerator());
         return defaultImportGenerators;
     }
 

@@ -23,11 +23,13 @@
  */
 package com.github.vladislavsevruk.generator.java.provider;
 
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
-import com.github.vladislavsevruk.generator.java.generator.ClassImportGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.InterfaceDeclarationGenerator;
+import com.github.vladislavsevruk.generator.java.generator.dependency.InterfaceImportGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaInterface;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,7 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
+@EqualsAndHashCode(callSuper = true)
 public class InterfaceContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**
@@ -65,13 +68,15 @@ public class InterfaceContentGeneratorProvider extends AbstractJavaClassContentG
     }
 
     @Override
-    protected List<ClassElementGenerator> getDefaultFieldGenerators() {
+    protected List<ClassElementCollectionGenerator> getDefaultFieldGenerators() {
         return new ArrayList<>();
     }
 
     @Override
-    protected List<ClassImportGenerator> getDefaultImportGenerators() {
-        return new ArrayList<>();
+    protected List<ClassElementCollectionGenerator> getDefaultImportGenerators() {
+        List<ClassElementCollectionGenerator> defaultImportGenerators = new ArrayList<>();
+        defaultImportGenerators.add(new InterfaceImportGenerator());
+        return defaultImportGenerators;
     }
 
     @Override

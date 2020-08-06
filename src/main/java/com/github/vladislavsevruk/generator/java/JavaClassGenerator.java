@@ -70,7 +70,7 @@ public class JavaClassGenerator {
      */
     public void generateJavaClasses(JavaClassGeneratorConfig config, SchemaObjectStorage storage) {
         FileUtil.recursiveMkdir(config.getPathToTargetFolder());
-        storage.getAllObjects().forEach(object -> generateJavaClass(config, object));
+        storage.getAllObjects().forEach(object -> generateJavaClassFile(config, object));
     }
 
     private void generateJavaClassFile(JavaClassGeneratorConfig config, SchemaObject schemaObject) {

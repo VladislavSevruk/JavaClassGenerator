@@ -27,6 +27,7 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ import java.util.stream.Collectors;
 /**
  * Generates 'toString()' method.
  */
+@EqualsAndHashCode(callSuper = true)
 public class ToStringGenerator extends BaseMethodGenerator {
 
     /**
@@ -44,7 +46,7 @@ public class ToStringGenerator extends BaseMethodGenerator {
         if (config.isUseLombokAnnotations()) {
             return "";
         }
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("\n");
         List<SchemaField> schemaFields = schemaObject.getFields();
         addOverrideAnnotation(stringBuilder, config);
         stringBuilder.append(config.getIndent().value()).append("public String toString() {\n");

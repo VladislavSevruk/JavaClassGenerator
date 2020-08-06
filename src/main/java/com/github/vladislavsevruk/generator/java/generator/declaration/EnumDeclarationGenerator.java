@@ -26,12 +26,14 @@ package com.github.vladislavsevruk.generator.java.generator.declaration;
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates declaration line for Java enumeration.
  */
+@EqualsAndHashCode(callSuper = true)
 public class EnumDeclarationGenerator extends BaseDeclarationGenerator {
 
     public EnumDeclarationGenerator(List<ClassElementGenerator> enumAnnotationGenerators) {
@@ -43,11 +45,11 @@ public class EnumDeclarationGenerator extends BaseDeclarationGenerator {
      */
     @Override
     public String generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("\n");
         addAnnotations(stringBuilder, config, schemaObject);
         stringBuilder.append("public enum ").append(schemaObject.getName());
         addInterfaces(stringBuilder, schemaObject);
-        stringBuilder.append(" {\n\n");
+        stringBuilder.append(" {\n");
         return stringBuilder.toString();
     }
 }

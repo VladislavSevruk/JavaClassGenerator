@@ -24,15 +24,19 @@
 package com.github.vladislavsevruk.generator.java.generator.method;
 
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
+import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import com.github.vladislavsevruk.generator.java.type.predefined.sequence.ArraySchemaEntity;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates 'equals(Object)' method.
  */
+@EqualsAndHashCode(callSuper = true)
 public class EqualsGenerator extends BaseMethodGenerator {
 
     /**
@@ -43,7 +47,7 @@ public class EqualsGenerator extends BaseMethodGenerator {
         if (config.isUseLombokAnnotations()) {
             return "";
         }
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("\n");
         String objectName = schemaObject.getName();
         List<SchemaField> schemaFields = schemaObject.getFields();
         addOverrideAnnotation(stringBuilder, config);
@@ -73,11 +77,14 @@ public class EqualsGenerator extends BaseMethodGenerator {
     private void addEqualsForField(StringBuilder stringBuilder, JavaClassGeneratorConfig config,
             SchemaField schemaField) {
         String fieldName = EntityNameUtil.uppercaseFirstLetter(schemaField.getName());
-        addEqualsCondition(stringBuilder, config, getFieldEqualsCondition(schemaField.getType().getName(), fieldName));
+        addEqualsCondition(stringBuilder, config, getFieldEqualsCondition(schemaField.getType(), fieldName));
     }
 
-    private String getFieldEqualsCondition(String javaType, String fieldName) {
-        switch (javaType) {
+    private String getFieldEqualsCondition(SchemaEntity javaType, String fieldName) {
+        if (ArraySchemaEntity.class.equals(javaType.getClass())) {
+            return String.format("!Arrays.equals(get%s(), other.get%<s())", fieldName);
+        }
+        switch (javaType.getName()) {
             case "boolean":
                 return String.format("this.is%s() != other.is%<s()", fieldName);
             case "byte":

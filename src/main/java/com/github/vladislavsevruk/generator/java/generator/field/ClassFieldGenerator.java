@@ -24,17 +24,20 @@
 package com.github.vladislavsevruk.generator.java.generator.field;
 
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
-import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
+import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.FieldAnnotationGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Generates Java class fields.
  */
-public class ClassFieldGenerator implements ClassElementGenerator {
+@EqualsAndHashCode
+public class ClassFieldGenerator implements ClassElementCollectionGenerator {
 
     private List<FieldAnnotationGenerator> annotationGenerators;
 
@@ -46,19 +49,19 @@ public class ClassFieldGenerator implements ClassElementGenerator {
      * {@inheritDoc}
      */
     @Override
-    public String generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
-        StringBuilder stringBuilder = new StringBuilder();
-        schemaObject.getFields().forEach(field -> addField(stringBuilder, config, field));
-        return stringBuilder.toString();
+    public List<String> generate(JavaClassGeneratorConfig config, SchemaObject schemaObject) {
+        return schemaObject.getFields().stream().map(field -> generateField(config, field))
+                .collect(Collectors.toList());
     }
 
-    private void addField(StringBuilder stringBuilder, JavaClassGeneratorConfig config, SchemaField field) {
-        annotationGenerators.forEach(generator -> stringBuilder.append(generator.generate(config, field)));
-        stringBuilder.append(config.getIndent().value()).append("private ")
-                .append(field.getType().getParameterizedDeclaration()).append(" ").append(field.getName())
-                .append(";\n");
+    private String generateField(JavaClassGeneratorConfig config, SchemaField field) {
+        StringBuilder stringBuilder = new StringBuilder();
         if (config.isAddEmptyLineBetweenFields()) {
             stringBuilder.append("\n");
         }
+        annotationGenerators.forEach(generator -> stringBuilder.append(generator.generate(config, field)));
+        return stringBuilder.append(config.getIndent().value()).append("private ")
+                .append(field.getType().getParameterizedDeclaration()).append(" ").append(field.getName()).append(";\n")
+                .toString();
     }
 }

@@ -26,10 +26,12 @@ package com.github.vladislavsevruk.generator.java.generator.method;
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
+import lombok.EqualsAndHashCode;
 
 /**
  * Contains common methods for class methods generation.
  */
+@EqualsAndHashCode
 public abstract class BaseMethodGenerator implements ClassElementGenerator {
 
     protected void addOverrideAnnotation(StringBuilder stringBuilder, JavaClassGeneratorConfig config) {
@@ -37,7 +39,7 @@ public abstract class BaseMethodGenerator implements ClassElementGenerator {
     }
 
     protected void closeMethod(StringBuilder stringBuilder, JavaClassGeneratorConfig config) {
-        stringBuilder.append(config.getIndent().value()).append("}\n\n");
+        stringBuilder.append(config.getIndent().value()).append("}\n");
     }
 
     protected StringBuilder doubleIndents(StringBuilder stringBuilder, JavaClassGeneratorConfig config) {

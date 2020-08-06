@@ -27,12 +27,14 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates 'hashCode()' method.
  */
+@EqualsAndHashCode(callSuper = true)
 public class HashCodeGenerator extends BaseMethodGenerator {
 
     /**
@@ -43,7 +45,7 @@ public class HashCodeGenerator extends BaseMethodGenerator {
         if (config.isUseLombokAnnotations()) {
             return "";
         }
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("\n");
         List<SchemaField> schemaFields = schemaObject.getFields();
         addOverrideAnnotation(stringBuilder, config);
         stringBuilder.append(config.getIndent().value()).append("public int hashCode() {\n");

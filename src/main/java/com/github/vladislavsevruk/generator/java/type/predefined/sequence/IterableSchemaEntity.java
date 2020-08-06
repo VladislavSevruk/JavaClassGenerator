@@ -51,4 +51,13 @@ public class IterableSchemaEntity extends BaseIterableSchemaEntity {
     public String getName() {
         return "Iterable";
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPackage() {
+        // null for 'java.lang' package to avoid explicit import generation
+        return null;
+    }
 }
