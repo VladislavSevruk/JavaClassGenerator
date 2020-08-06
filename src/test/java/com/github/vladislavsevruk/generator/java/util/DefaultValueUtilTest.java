@@ -31,7 +31,7 @@ import java.util.function.Supplier;
 class DefaultValueUtilTest {
 
     @Test
-    void orDefaultSupplier() {
+    void orDefaultSupplierTest() {
         String value = "default";
         Supplier<String> defaultSupplier = () -> value;
         Assertions.assertEquals(value, DefaultValueUtil.orDefault(null, defaultSupplier));

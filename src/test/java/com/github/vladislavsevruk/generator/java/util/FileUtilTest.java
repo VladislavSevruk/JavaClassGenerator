@@ -31,13 +31,13 @@ import java.io.File;
 class FileUtilTest {
 
     @Test
-    void addFilePathSeparator() {
+    void addFilePathSeparatorTest() {
         String path = "dirPath";
         Assertions.assertEquals(path + File.separator, FileUtil.addPathSeparator(path));
     }
 
     @Test
-    void dontAddFilePathSeparator() {
+    void dontAddFilePathSeparatorTest() {
         String path = "dirPath" + File.separator;
         Assertions.assertEquals(path, FileUtil.addPathSeparator(path));
     }

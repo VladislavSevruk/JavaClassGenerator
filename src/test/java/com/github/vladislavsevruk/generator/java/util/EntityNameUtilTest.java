@@ -29,56 +29,56 @@ import org.junit.jupiter.api.Test;
 class EntityNameUtilTest {
 
     @Test
-    void javaFormatClassNameFromLowerCamelcase() {
+    void javaFormatClassNameFromLowerCamelcaseTest() {
         String input = "testValue";
         String result = EntityNameUtil.getJavaFormatClassName(input);
         Assertions.assertEquals("TestValue", result);
     }
 
     @Test
-    void javaFormatClassNameFromLowercaseWithUnderscores() {
+    void javaFormatClassNameFromLowercaseWithUnderscoresTest() {
         String input = "test_value";
         String result = EntityNameUtil.getJavaFormatClassName(input);
         Assertions.assertEquals("TestValue", result);
     }
 
     @Test
-    void javaFormatClassNameFromUpperCamelcase() {
+    void javaFormatClassNameFromUpperCamelcaseTest() {
         String input = "TestValue";
         String result = EntityNameUtil.getJavaFormatClassName(input);
         Assertions.assertEquals("TestValue", result);
     }
 
     @Test
-    void javaFormatClassNameFromUppercaseWithUnderscores() {
+    void javaFormatClassNameFromUppercaseWithUnderscoresTest() {
         String input = "Test_Value";
         String result = EntityNameUtil.getJavaFormatClassName(input);
         Assertions.assertEquals("TestValue", result);
     }
 
     @Test
-    void javaFormatFieldNameFromLowerCamelcase() {
+    void javaFormatFieldNameFromLowerCamelcaseTest() {
         String input = "testValue";
         String result = EntityNameUtil.getJavaFormatFieldName(input);
         Assertions.assertEquals("testValue", result);
     }
 
     @Test
-    void javaFormatFieldNameFromLowercaseWithUnderscores() {
+    void javaFormatFieldNameFromLowercaseWithUnderscoresTest() {
         String input = "test_value";
         String result = EntityNameUtil.getJavaFormatFieldName(input);
         Assertions.assertEquals("testValue", result);
     }
 
     @Test
-    void javaFormatFieldNameFromUpperCamelcase() {
+    void javaFormatFieldNameFromUpperCamelcaseTest() {
         String input = "TestValue";
         String result = EntityNameUtil.getJavaFormatFieldName(input);
         Assertions.assertEquals("testValue", result);
     }
 
     @Test
-    void javaFormatFieldNameFromUppercaseWithUnderscores() {
+    void javaFormatFieldNameFromUppercaseWithUnderscoresTest() {
         String input = "Test_Value";
         String result = EntityNameUtil.getJavaFormatFieldName(input);
         Assertions.assertEquals("testValue", result);
