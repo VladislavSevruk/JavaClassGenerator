@@ -56,6 +56,15 @@ public final class SchemaObjectStorageImpl implements SchemaObjectStorage {
     }
 
     /**
+     * Adds class schema to this storage with object name as a key.
+     *
+     * @param schemaObject <code>SchemaObject</code> of some class.
+     */
+    public void put(SchemaObject schemaObject) {
+        put(schemaObject.getName(), schemaObject);
+    }
+
+    /**
      * Adds class schema to this storage with received name as a key.
      *
      * @param name         <code>String</code> with class schema name.

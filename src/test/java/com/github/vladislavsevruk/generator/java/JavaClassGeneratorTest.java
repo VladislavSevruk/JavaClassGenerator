@@ -130,8 +130,8 @@ class JavaClassGeneratorTest {
                 .setInterfaces(2).setName(postfix2).build(postfix2);
         String file2Name = schemaObject2.getName();
         JavaClassGeneratorConfig config = JavaClassGeneratorConfigProvider.getDefault();
-        objectStorage.put(file1Name, schemaObject1);
-        objectStorage.put(file2Name, schemaObject2);
+        objectStorage.put(schemaObject1);
+        objectStorage.put(schemaObject2);
         new JavaClassGenerator().generateJavaClasses(config, objectStorage);
         String file1Path = String.join("", TestConstant.PATH_TO_TEMP_FOLDER, File.separator, file1Name, ".java");
         Assertions.assertTrue(new File(file1Path).exists());
