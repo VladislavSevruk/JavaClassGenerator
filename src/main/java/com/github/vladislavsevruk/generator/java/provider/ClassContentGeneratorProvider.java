@@ -41,7 +41,6 @@ import com.github.vladislavsevruk.generator.java.generator.method.GetterSetterGe
 import com.github.vladislavsevruk.generator.java.generator.method.HashCodeGenerator;
 import com.github.vladislavsevruk.generator.java.generator.method.ToStringGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,6 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-@EqualsAndHashCode(callSuper = true)
 public class ClassContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**

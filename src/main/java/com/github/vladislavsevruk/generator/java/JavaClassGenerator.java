@@ -30,15 +30,13 @@ import com.github.vladislavsevruk.generator.java.provider.JavaClassContentGenera
 import com.github.vladislavsevruk.generator.java.storage.SchemaObjectStorage;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.FileUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Generates Java class files for class schemas.
  */
+@Log4j2
 public class JavaClassGenerator {
-
-    private static final Logger logger = LogManager.getLogger(JavaClassGenerator.class);
 
     private ClassContentGeneratorPicker classContentGeneratorPicker;
 
@@ -83,9 +81,9 @@ public class JavaClassGenerator {
                 .generate(config, schemaObject);
         String generatedFilePath = FileUtil.writeToNewFile(filePath, javaClassContent);
         if (generatedFilePath != null) {
-            logger.info(() -> "Generated class: " + generatedFilePath);
+            log.info(() -> "Generated class: " + generatedFilePath);
         } else {
-            logger.warn(() -> "Cannot generate: " + schemaObject.getName());
+            log.warn(() -> "Cannot generate: " + schemaObject.getName());
         }
     }
 }

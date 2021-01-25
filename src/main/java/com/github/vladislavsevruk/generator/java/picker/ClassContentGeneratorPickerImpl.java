@@ -28,14 +28,12 @@ import com.github.vladislavsevruk.generator.java.exception.ClassContentGeneratin
 import com.github.vladislavsevruk.generator.java.provider.JavaClassContentGeneratorProvider;
 import com.github.vladislavsevruk.generator.java.storage.ClassContentGeneratorProviderStorage;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 /**
  * Implementation of <code>ClassContentGeneratorPicker</code>.
  *
  * @see ClassContentGeneratorPicker
  */
-@EqualsAndHashCode
 public class ClassContentGeneratorPickerImpl implements ClassContentGeneratorPicker {
 
     private final ClassContentGeneratorProviderStorage classContentGeneratorProviderStorage;

@@ -30,7 +30,6 @@ import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.type.predefined.PrimitiveSchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.predefined.sequence.ArraySchemaEntity;
-import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +39,6 @@ import java.util.List;
 /**
  * Generates imports for equals method.
  */
-@EqualsAndHashCode
 public class EqualsMethodImportGenerator implements ClassElementCollectionGenerator {
 
     /**

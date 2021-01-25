@@ -30,7 +30,6 @@ import com.github.vladislavsevruk.generator.java.generator.dependency.InterfaceI
 import com.github.vladislavsevruk.generator.java.generator.field.EnumConstantGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaEnum;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,6 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-@EqualsAndHashCode(callSuper = true)
 public class EnumContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**

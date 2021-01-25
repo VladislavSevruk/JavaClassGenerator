@@ -27,12 +27,10 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.generator.FieldAnnotationGenerator;
 import com.github.vladislavsevruk.generator.java.type.JacksonSchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
-import lombok.EqualsAndHashCode;
 
 /**
  * Generates Jackson library annotations for fields.
  */
-@EqualsAndHashCode
 public class JacksonFieldAnnotationGenerator implements FieldAnnotationGenerator {
 
     /**

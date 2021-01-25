@@ -27,7 +27,6 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +34,6 @@ import java.util.stream.Collectors;
 /**
  * Generates 'toString()' method.
  */
-@EqualsAndHashCode(callSuper = true)
 public class ToStringGenerator extends BaseMethodGenerator {
 
     /**

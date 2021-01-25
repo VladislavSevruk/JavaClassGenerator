@@ -28,7 +28,6 @@ import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectio
 import com.github.vladislavsevruk.generator.java.generator.FieldAnnotationGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 /**
  * Generates Java class fields.
  */
-@EqualsAndHashCode
 public class ClassFieldGenerator implements ClassElementCollectionGenerator {
 
     private List<FieldAnnotationGenerator> annotationGenerators;

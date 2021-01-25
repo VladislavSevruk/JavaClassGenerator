@@ -27,7 +27,6 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.type.SchemaUnit;
-import lombok.EqualsAndHashCode;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 /**
  * Generates Java enumeration constant fields.
  */
-@EqualsAndHashCode
 public class EnumConstantGenerator implements ClassElementCollectionGenerator {
 
     /**
