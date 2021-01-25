@@ -29,7 +29,6 @@ import com.github.vladislavsevruk.generator.java.generator.declaration.Interface
 import com.github.vladislavsevruk.generator.java.generator.dependency.InterfaceImportGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaInterface;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,6 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-@EqualsAndHashCode(callSuper = true)
 public class InterfaceContentGeneratorProvider extends AbstractJavaClassContentGeneratorProvider {
 
     /**

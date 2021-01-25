@@ -27,7 +27,6 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.type.JacksonSchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +34,6 @@ import java.util.Collections;
 /**
  * Generates imports for Jackson library annotations.
  */
-@EqualsAndHashCode
 public class JacksonImportGenerator implements ClassElementCollectionGenerator {
 
     /**

@@ -27,14 +27,12 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates 'hashCode()' method.
  */
-@EqualsAndHashCode(callSuper = true)
 public class HashCodeGenerator extends BaseMethodGenerator {
 
     /**

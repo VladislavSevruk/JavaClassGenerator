@@ -26,12 +26,10 @@ package com.github.vladislavsevruk.generator.java.generator.declaration;
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 /**
  * Generates class package declaration line.
  */
-@EqualsAndHashCode
 public class PackageGenerator implements ClassElementGenerator {
 
     /**

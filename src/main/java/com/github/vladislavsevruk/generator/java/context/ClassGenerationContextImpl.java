@@ -28,12 +28,9 @@ import com.github.vladislavsevruk.generator.java.picker.ClassContentGeneratorPic
 import com.github.vladislavsevruk.generator.java.storage.ClassContentGeneratorProviderStorage;
 import com.github.vladislavsevruk.generator.java.storage.ClassContentGeneratorProviderStorageImpl;
 import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Implementation of <code>ClassGenerationContext</code>.
@@ -42,11 +39,9 @@ import org.apache.logging.log4j.Logger;
  */
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Getter
-@ToString
-@EqualsAndHashCode
+@Log4j2
 final class ClassGenerationContextImpl implements ClassGenerationContext {
 
-    private static final Logger logger = LogManager.getLogger(ClassGenerationContextImpl.class);
     ClassContentGeneratorPicker classContentGeneratorPicker;
     ClassContentGeneratorProviderStorage classContentGeneratorProviderStorage;
 
@@ -63,11 +58,11 @@ final class ClassGenerationContextImpl implements ClassGenerationContext {
             ClassGenerationModuleFactoryMethod<ClassContentGeneratorProviderStorage> classContentGeneratorProviderStorageFactoryMethod) {
         this.classContentGeneratorProviderStorage = orDefault(classContentGeneratorProviderStorageFactoryMethod,
                 context -> new ClassContentGeneratorProviderStorageImpl());
-        logger.debug(() -> String.format("Using '%s' as class content generator provider storage.",
+        log.debug(() -> String.format("Using '%s' as class content generator provider storage.",
                 classContentGeneratorProviderStorage.getClass().getName()));
         this.classContentGeneratorPicker = orDefault(classContentGeneratorPickerFactoryMethod,
                 context -> new ClassContentGeneratorPickerImpl(classContentGeneratorProviderStorage));
-        logger.debug(() -> String.format("Using '%s' as class content generator picker.",
+        log.debug(() -> String.format("Using '%s' as class content generator picker.",
                 classContentGeneratorPicker.getClass().getName()));
     }
 

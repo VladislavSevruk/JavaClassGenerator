@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/VladislavSevruk/JavaClassGenerator.svg?branch=develop)](https://travis-ci.com/VladislavSevruk/JavaClassGenerator)
+[![Build Status](https://travis-ci.org/VladislavSevruk/JavaClassGenerator.svg?branch=master)](https://travis-ci.com/VladislavSevruk/JavaClassGenerator)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=VladislavSevruk_JavaClassGenerator&metric=alert_status)](https://sonarcloud.io/dashboard?id=VladislavSevruk_JavaClassGenerator)
 [![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=VladislavSevruk_JavaClassGenerator&metric=coverage)](https://sonarcloud.io/component_measures?id=VladislavSevruk_JavaClassGenerator&metric=coverage)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.vladislavsevruk/java-class-generator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.vladislavsevruk/java-class-generator)
@@ -26,13 +26,13 @@ Add the following dependency to your pom.xml:
 <dependency>
       <groupId>com.github.vladislavsevruk</groupId>
       <artifactId>java-class-generator</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
 </dependency>
 ```
 ### Gradle
 Add the following dependency to your build.gradle:
 ```groovy
-implementation 'com.github.vladislavsevruk:java-class-generator:1.0.0'
+implementation 'com.github.vladislavsevruk:java-class-generator:1.0.1'
 ```
 
 ## Class generation configuration
