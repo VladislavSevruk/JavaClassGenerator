@@ -78,9 +78,9 @@ class ClassGenerationContextManagerTest {
         ClassGenerationModuleFactory
                 .replaceClassContentGeneratorProviderStorage(context -> classContentGeneratorProviderStorage);
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertNotEquals(resolvingContext1, resolvingContext2);
-        Assertions.assertEquals(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
-        Assertions.assertEquals(classContentGeneratorProviderStorage,
+        Assertions.assertNotSame(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
+        Assertions.assertSame(classContentGeneratorProviderStorage,
                 resolvingContext2.getClassContentGeneratorProviderStorage());
     }
 
@@ -91,9 +91,9 @@ class ClassGenerationContextManagerTest {
         ClassGenerationContext resolvingContext1 = ClassGenerationContextManager.getContext();
         ClassGenerationModuleFactory.replaceClassContentGeneratorPicker(context -> classContentGeneratorPicker);
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertNotEquals(resolvingContext1, resolvingContext2);
-        Assertions.assertEquals(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
-        Assertions.assertEquals(resolvingContext1.getClassContentGeneratorProviderStorage(),
+        Assertions.assertNotSame(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
+        Assertions.assertNotSame(resolvingContext1.getClassContentGeneratorProviderStorage(),
                 resolvingContext2.getClassContentGeneratorProviderStorage());
     }
 
@@ -105,10 +105,10 @@ class ClassGenerationContextManagerTest {
         ClassGenerationModuleFactory
                 .replaceClassContentGeneratorProviderStorage(context -> classContentGeneratorProviderStorage);
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertNotEquals(resolvingContext1, resolvingContext2);
-        Assertions.assertEquals(classContentGeneratorProviderStorage,
+        Assertions.assertNotSame(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(classContentGeneratorProviderStorage,
                 resolvingContext2.getClassContentGeneratorProviderStorage());
-        Assertions.assertNotEquals(resolvingContext1.getClassContentGeneratorPicker(),
+        Assertions.assertNotSame(resolvingContext1.getClassContentGeneratorPicker(),
                 resolvingContext2.getClassContentGeneratorPicker());
     }
 
@@ -118,7 +118,6 @@ class ClassGenerationContextManagerTest {
         ClassGenerationContextManager.refreshContext();
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
         Assertions.assertNotSame(resolvingContext1, resolvingContext2);
-        Assertions.assertEquals(resolvingContext1, resolvingContext2);
     }
 
     @Test
@@ -131,9 +130,9 @@ class ClassGenerationContextManagerTest {
                 .replaceClassContentGeneratorProviderStorage(context -> classContentGeneratorProviderStorage);
         ClassGenerationContextManager.refreshContext();
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertNotEquals(resolvingContext1, resolvingContext2);
-        Assertions.assertEquals(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
-        Assertions.assertEquals(classContentGeneratorProviderStorage,
+        Assertions.assertNotSame(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
+        Assertions.assertSame(classContentGeneratorProviderStorage,
                 resolvingContext2.getClassContentGeneratorProviderStorage());
     }
 
@@ -145,11 +144,9 @@ class ClassGenerationContextManagerTest {
         ClassGenerationModuleFactory.replaceClassContentGeneratorPicker(context -> classContentGeneratorPicker);
         ClassGenerationContextManager.refreshContext();
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertNotEquals(resolvingContext1, resolvingContext2);
-        Assertions.assertNotEquals(resolvingContext1.getClassContentGeneratorPicker(),
-                resolvingContext2.getClassContentGeneratorPicker());
-        Assertions.assertEquals(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
-        Assertions.assertEquals(resolvingContext1.getClassContentGeneratorProviderStorage(),
+        Assertions.assertNotSame(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(classContentGeneratorPicker, resolvingContext2.getClassContentGeneratorPicker());
+        Assertions.assertNotSame(resolvingContext1.getClassContentGeneratorProviderStorage(),
                 resolvingContext2.getClassContentGeneratorProviderStorage());
     }
 
@@ -162,10 +159,10 @@ class ClassGenerationContextManagerTest {
                 .replaceClassContentGeneratorProviderStorage(context -> classContentGeneratorProviderStorage);
         ClassGenerationContextManager.refreshContext();
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertNotEquals(resolvingContext1, resolvingContext2);
-        Assertions.assertEquals(classContentGeneratorProviderStorage,
+        Assertions.assertNotSame(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(classContentGeneratorProviderStorage,
                 resolvingContext2.getClassContentGeneratorProviderStorage());
-        Assertions.assertNotEquals(resolvingContext1.getClassContentGeneratorPicker(),
+        Assertions.assertNotSame(resolvingContext1.getClassContentGeneratorPicker(),
                 resolvingContext2.getClassContentGeneratorPicker());
     }
 
@@ -199,7 +196,7 @@ class ClassGenerationContextManagerTest {
         ClassGenerationModuleFactory
                 .replaceClassContentGeneratorProviderStorage(context -> classContentGeneratorProviderStorage);
         ClassGenerationContext resolvingContext2 = ClassGenerationContextManager.getContext();
-        Assertions.assertEquals(resolvingContext1, resolvingContext2);
+        Assertions.assertSame(resolvingContext1, resolvingContext2);
     }
 
     @Test

@@ -27,9 +27,7 @@ import com.github.vladislavsevruk.generator.java.provider.ClassContentGeneratorP
 import com.github.vladislavsevruk.generator.java.provider.EnumContentGeneratorProvider;
 import com.github.vladislavsevruk.generator.java.provider.InterfaceContentGeneratorProvider;
 import com.github.vladislavsevruk.generator.java.provider.JavaClassContentGeneratorProvider;
-import lombok.EqualsAndHashCode;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,11 +42,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @see JavaClassContentGeneratorProvider
  * @see ClassContentGeneratorProviderStorage
  */
-@EqualsAndHashCode
+@Log4j2
 public class ClassContentGeneratorProviderStorageImpl implements ClassContentGeneratorProviderStorage {
 
     private static final ReadWriteLock PROVIDERS_LOCK = new ReentrantReadWriteLock();
-    private static final Logger logger = LogManager.getLogger(ClassContentGeneratorProviderStorageImpl.class);
     private List<JavaClassContentGeneratorProvider> providers = new LinkedList<>();
 
     public ClassContentGeneratorProviderStorageImpl() {
@@ -74,8 +71,7 @@ public class ClassContentGeneratorProviderStorageImpl implements ClassContentGen
         PROVIDERS_LOCK.writeLock().lock();
         int targetTypeIndex = getIndexOfType(targetType);
         if (targetTypeIndex == -1) {
-            logger.info(
-                    "Target type is not present at list, class content generator provider will be added to list end.");
+            log.info("Target type is not present at list, class content generator provider will be added to list end.");
             add(providers.size(), customClassContentGeneratorProvider);
         } else {
             add(targetTypeIndex + 1, customClassContentGeneratorProvider);
@@ -92,8 +88,7 @@ public class ClassContentGeneratorProviderStorageImpl implements ClassContentGen
         PROVIDERS_LOCK.writeLock().lock();
         int targetTypeIndex = getIndexOfType(targetType);
         if (targetTypeIndex == -1) {
-            logger.info(
-                    "Target type is not present at list, class content generator provider will be added to list end.");
+            log.info("Target type is not present at list, class content generator provider will be added to list end.");
             add(providers.size(), customClassContentGeneratorProvider);
         } else {
             add(targetTypeIndex, customClassContentGeneratorProvider);
@@ -115,16 +110,16 @@ public class ClassContentGeneratorProviderStorageImpl implements ClassContentGen
 
     private void add(int index, JavaClassContentGeneratorProvider customClassContentGeneratorProvider) {
         if (customClassContentGeneratorProvider == null) {
-            logger.info("Received class content generator provider is null so it will not be added.");
+            log.info("Received class content generator provider is null so it will not be added.");
             return;
         }
         int targetTypeIndex = getIndexOfType(customClassContentGeneratorProvider.getClass());
         if (targetTypeIndex != -1) {
-            logger.info(
+            log.info(
                     "Received class content generator provider is already present at list so it's copy will not be added.");
             return;
         }
-        logger.debug(() -> String.format("Added '%s' class content generator provider.",
+        log.debug(() -> String.format("Added '%s' class content generator provider.",
                 customClassContentGeneratorProvider.getClass().getName()));
         providers.add(index, customClassContentGeneratorProvider);
     }
@@ -132,7 +127,7 @@ public class ClassContentGeneratorProviderStorageImpl implements ClassContentGen
     private <T> int getIndexOfType(Class<? extends T> targetType) {
         int targetTypeIndex = -1;
         if (targetType == null) {
-            logger.info("Target type is null.");
+            log.info("Target type is null.");
             return -1;
         }
         for (int i = 0; i < providers.size(); ++i) {

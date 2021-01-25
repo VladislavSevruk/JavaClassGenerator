@@ -28,7 +28,6 @@ import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator
 import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.DefaultValueUtil;
-import lombok.EqualsAndHashCode;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +36,6 @@ import java.util.stream.Collectors;
 /**
  * Contains common logic for Java type class declarations.
  */
-@EqualsAndHashCode
 public abstract class BaseDeclarationGenerator implements ClassElementGenerator {
 
     private List<ClassElementGenerator> classAnnotationGenerators;

@@ -28,7 +28,6 @@ import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectio
 import com.github.vladislavsevruk.generator.java.type.SchemaElementSequence;
 import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -40,7 +39,6 @@ import java.util.stream.Collectors;
  *
  * @see ClassElementCollectionGenerator
  */
-@EqualsAndHashCode
 public abstract class AbstractImportGenerator implements ClassElementCollectionGenerator {
 
     /**

@@ -29,7 +29,6 @@ import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.util.DefaultValueUtil;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
-import lombok.EqualsAndHashCode;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +36,6 @@ import java.util.List;
 /**
  * Generates getter and setter methods for class fields.
  */
-@EqualsAndHashCode(callSuper = true)
 public class GetterSetterGenerator extends BaseMethodGenerator {
 
     private List<FieldAnnotationGenerator> getterAnnotationGenerators;

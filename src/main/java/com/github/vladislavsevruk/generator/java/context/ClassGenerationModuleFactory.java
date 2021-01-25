@@ -25,8 +25,7 @@ package com.github.vladislavsevruk.generator.java.context;
 
 import com.github.vladislavsevruk.generator.java.picker.ClassContentGeneratorPicker;
 import com.github.vladislavsevruk.generator.java.storage.ClassContentGeneratorProviderStorage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -34,11 +33,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * Provides replaceable modules schemas required for class generation mechanism.
  */
+@Log4j2
 public final class ClassGenerationModuleFactory {
 
     private static final ReadWriteLock CLASS_CONTENT_GENERATOR_PICKER_LOCK = new ReentrantReadWriteLock();
     private static final ReadWriteLock CLASS_CONTENT_GENERATOR_PROVIDER_STORAGE_LOCK = new ReentrantReadWriteLock();
-    private static final Logger logger = LogManager.getLogger(ClassGenerationModuleFactory.class);
     private static ClassGenerationModuleFactoryMethod<ClassContentGeneratorPicker> classContentGeneratorPicker;
     private static ClassGenerationModuleFactoryMethod<ClassContentGeneratorProviderStorage>
             classContentGeneratorProviderStorage;
@@ -79,7 +78,7 @@ public final class ClassGenerationModuleFactory {
     public static void replaceClassContentGeneratorPicker(
             ClassGenerationModuleFactoryMethod<ClassContentGeneratorPicker> picker) {
         CLASS_CONTENT_GENERATOR_PICKER_LOCK.writeLock().lock();
-        logger.info(() -> String.format("Replacing ClassContentGeneratorPicker by '%s'.",
+        log.info(() -> String.format("Replacing ClassContentGeneratorPicker by '%s'.",
                 picker == null ? null : picker.getClass().getName()));
         classContentGeneratorPicker = picker;
         CLASS_CONTENT_GENERATOR_PICKER_LOCK.writeLock().unlock();
@@ -98,7 +97,7 @@ public final class ClassGenerationModuleFactory {
     public static void replaceClassContentGeneratorProviderStorage(
             ClassGenerationModuleFactoryMethod<ClassContentGeneratorProviderStorage> storage) {
         CLASS_CONTENT_GENERATOR_PROVIDER_STORAGE_LOCK.writeLock().lock();
-        logger.info(() -> String.format("Replacing ClassContentGeneratorProviderStorage by '%s'.",
+        log.info(() -> String.format("Replacing ClassContentGeneratorProviderStorage by '%s'.",
                 storage == null ? null : storage.getClass().getName()));
         classContentGeneratorProviderStorage = storage;
         CLASS_CONTENT_GENERATOR_PROVIDER_STORAGE_LOCK.writeLock().unlock();

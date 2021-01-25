@@ -26,7 +26,6 @@ package com.github.vladislavsevruk.generator.java.provider;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementCollectionGenerator;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.generator.declaration.PackageGenerator;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.List;
@@ -36,7 +35,6 @@ import java.util.List;
  *
  * @see JavaClassContentGeneratorProvider
  */
-@EqualsAndHashCode
 public abstract class AbstractJavaClassContentGeneratorProvider implements JavaClassContentGeneratorProvider {
 
     @Getter
