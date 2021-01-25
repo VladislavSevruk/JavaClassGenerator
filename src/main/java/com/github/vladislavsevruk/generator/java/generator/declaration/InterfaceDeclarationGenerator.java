@@ -27,7 +27,6 @@ import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaEntity;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +34,6 @@ import java.util.stream.Collectors;
 /**
  * Generates declaration line for Java interface.
  */
-@EqualsAndHashCode(callSuper = true)
 public class InterfaceDeclarationGenerator extends BaseDeclarationGenerator {
 
     public InterfaceDeclarationGenerator(List<ClassElementGenerator> interfaceAnnotationGenerators) {

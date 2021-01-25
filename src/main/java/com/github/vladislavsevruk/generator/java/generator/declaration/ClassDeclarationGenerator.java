@@ -26,14 +26,12 @@ package com.github.vladislavsevruk.generator.java.generator.declaration;
 import com.github.vladislavsevruk.generator.java.config.JavaClassGeneratorConfig;
 import com.github.vladislavsevruk.generator.java.generator.ClassElementGenerator;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates declaration line for Java class.
  */
-@EqualsAndHashCode(callSuper = true)
 public class ClassDeclarationGenerator extends BaseDeclarationGenerator {
 
     public ClassDeclarationGenerator(List<ClassElementGenerator> classAnnotationGenerators) {

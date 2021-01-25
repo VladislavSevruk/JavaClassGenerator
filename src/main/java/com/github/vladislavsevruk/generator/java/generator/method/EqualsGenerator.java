@@ -29,14 +29,12 @@ import com.github.vladislavsevruk.generator.java.type.SchemaField;
 import com.github.vladislavsevruk.generator.java.type.SchemaObject;
 import com.github.vladislavsevruk.generator.java.type.predefined.sequence.ArraySchemaEntity;
 import com.github.vladislavsevruk.generator.java.util.EntityNameUtil;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 /**
  * Generates 'equals(Object)' method.
  */
-@EqualsAndHashCode(callSuper = true)
 public class EqualsGenerator extends BaseMethodGenerator {
 
     /**

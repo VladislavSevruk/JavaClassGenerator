@@ -23,8 +23,7 @@
  */
 package com.github.vladislavsevruk.generator.java.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -33,9 +32,8 @@ import java.io.IOException;
 /**
  * Contains file related utility methods.
  */
+@Log4j2
 public final class FileUtil {
-
-    private static final Logger logger = LogManager.getLogger(FileUtil.class);
 
     private FileUtil() {
     }
@@ -64,7 +62,7 @@ public final class FileUtil {
             if (pathSeparatorIndex != -1) {
                 recursiveMkdir(path.substring(0, pathSeparatorIndex));
             }
-            logger.info(() -> String.format("Creating '%s' folder.", path));
+            log.info(() -> String.format("Creating '%s' folder.", path));
             new File(path).mkdir();
         }
     }
@@ -81,7 +79,7 @@ public final class FileUtil {
             fileWriter.write(classContent);
             return file.getPath();
         } catch (IOException ioEx) {
-            logger.error(() -> "Failed to write to file: " + file.getAbsolutePath());
+            log.error(() -> "Failed to write to file: " + file.getAbsolutePath());
             return null;
         }
     }
@@ -96,7 +94,7 @@ public final class FileUtil {
      */
     public static String writeToNewFile(File file, String classContent) {
         if (file.exists()) {
-            logger.warn(() -> "File already exists: " + file.getAbsolutePath());
+            log.warn(() -> "File already exists: " + file.getAbsolutePath());
             return null;
         }
         return writeToFile(file, classContent);
